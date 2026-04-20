@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOUR R SPORT | รับผลิตเสื้อกีฬาพิมพ์ลาย</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;800&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* โทนสี ดำ-ฟ้าสปอร์ต คงความพรีเมียม */
+            --surface-lowest: #000000;
+            --surface-low: #0a0f1a;
+            --surface-high: #151d30;
+            --primary: #5c85ff;
+            --primary-glow: rgba(92, 133, 255, 0.3);
+            --on-background: #ffffff;
+            --text-muted: #94a3b8;
+            --font-main: 'Kanit', sans-serif;
+            --font-eng: 'Lexend', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-main); background-color: var(--surface-lowest); color: var(--on-background); line-height: 1.6; }
+
+        /* --- กล่อง Placeholder สำหรับบอกตำแหน่งใส่รูป --- */
+        .placeholder-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px dashed var(--primary);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .placeholder-box i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.8; }
+        .placeholder-box span { font-weight: 600; font-size: 1.1rem; }
+        .placeholder-box small { color: var(--text-muted); font-size: 0.85rem; margin-top: 5px; }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(10, 15, 26, 0.8); backdrop-filter: blur(15px); z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .logo { font-family: var(--font-eng); font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px;}
+        .logo img { height: 40px; border-radius: 4px; }
+        .nav-contact { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+        /* Hero Section (แบ่งซ้าย-ขวา) */
+        .hero {
+            padding: 120px 5% 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 85vh;
+            background: radial-gradient(circle at 80% 50%, var(--primary-glow) 0%, var(--surface-lowest) 50%);
+        }
+        .hero h1 { font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 700; line-height: 1.2; margin-bottom: 20px; }
+        .hero h1 span { color: var(--primary); }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; max-width: 90%; }
+        
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 10px;
+            background: var(--primary); color: #fff;
+            padding: 15px 35px; border-radius: 50px; text-decoration: none;
+            font-weight: 600; font-size: 1.1rem;
+            transition: 0.3s; box-shadow: 0 10px 20px var(--primary-glow);
+        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 25px var(--primary-glow); }
+
+        /* แถบจุดขาย (USP) */
+        .usp-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px; padding: 40px 5%; background: var(--surface-low);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-align: center;
+        }
+        .usp-item i { font-size: 2rem; color: var(--primary); margin-bottom: 15px; }
+        .usp-item h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .usp-item p { font-size: 0.9rem; color: var(--text-muted); }
+
+        /* Section: Product Types (พื้นที่ใส่รูปผลงาน) */
+        .products-section { padding: 80px 5%; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; color: #fff; }
+        .section-header p { color: var(--text-muted); font-size: 1.1rem; }
+
+        .product-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+        .product-card {
+            background: var(--surface-high);
+            border-radius: 16px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .product-info { padding-top: 20px; text-align: center; }
+        .product-info h3 { font-size: 1.4rem; color: var(--primary); margin-bottom: 10px; }
+        .product-info p { font-size: 0.95rem; color: var(--text-muted); }
+
+        /* Social Proof / FB Showcase */
+        .social-showcase {
+            padding: 80px 5%; background: var(--surface-low);
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;
+        }
+        .embed-wrapper { background: #fff; border-radius: 12px; padding: 10px; overflow: hidden; text-align: center;}
+
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 100px; }
+            .hero p { margin: 0 auto 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <img src="https://scontent.fbkk22-2.fna.fbcdn.net/v/t39.30808-6/431980838_122116040852232549_1150495393282460677_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=your_token&_nc_ht=scontent.fbkk22-2.fna&oh=your_hash&oe=your_date" onerror="this.style.display='none'">
+            FOUR R SPORT
+        </div>
+        <a href="https://www.facebook.com/twnsp21" class="nav-contact"><i class="fa-brands fa-facebook"></i> ติดต่อเรา</a>
+    </nav>
+
+    <section class="hero">
+        <div>
+            <div style="color: var(--primary); font-weight: 600; margin-bottom: 10px; letter-spacing: 1px;">PREMIUM SPORTSWEAR</div>
+            <h1>รับผลิต <span>เสื้อกีฬาพิมพ์ลาย</span><br>ระดับพรีเมียม</h1>
+            <p>ยกระดับภาพลักษณ์ทีมของคุณด้วยงานพิมพ์สีสด คมชัด ไม่ลอก ตัดเย็บเนี๊ยบทุกจุด พร้อมบริการออกแบบให้ฟรีจนกว่าจะพอใจ!</p>
+            <a href="https://www.facebook.com/twnsp21" class="btn-primary">
+                ทักแชทประเมินราคาฟรี <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </div>
+        
+        <img src="649171262_1511361967656932_1832418583845176002_n.jpg" alt="ผลงานเสื้อกีฬาพิมพ์ลายพรีเมียม" style="width: 100%; max-width: 500px; border-radius: 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.6); justify-self: center;">
+    </section>
+
+    <section class="usp-bar">
+        <div class="usp-item">
+            <i class="fa-solid fa-pen-nib"></i>
+            <h4>ออกแบบฟรี 100%</h4>
+            <p>ทีมกราฟิกดูแล แก้แบบได้ไม่จำกัด</p>
+        </div>
+        <div class="usp-item">
+            <i class="fa-solid fa-shirt"></i>
+            <h4>ขั้นต่ำเพียง 5 ตัว</h4>
+            <p>ยิ่งสั่งเยอะ ราคายิ่งถูกลง</p>
+        </div>
+        <div class="usp-item">
+            <i class="fa-solid fa-infinity"></i>
+            <h4>เปลี่ยนข้อมูลฟรี</h4>
+            <p>เปลี่ยนชื่อ เบอร์ ข้อความ ได้ทุกตัว</p>
+        </div>
+        <div class="usp-item">
+            <i class="fa-solid fa-truck-fast"></i>
+            <h4>ผลิตไว ส่งฟรี</h4>
+            <p>ใช้เวลา 5-7 วัน (มีบริการงานด่วน)</p>
+        </div>
+    </section>
+
+    <section class="products-section">
+        <div class="section-header">
+            <h2>ผลงานที่เราเชี่ยวชาญ</h2>
+            <p>รองรับทุกความต้องการ ไม่ว่าจะเป็นงานราชการ เอกชน หรือเสื้อกลุ่ม</p>
+        </div>
+        
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="placeholder-box" style="height: 250px;">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>[ ใส่รูปเสื้อกรมชลประทาน / ป่าไม้ ]</span>
+                    <small>ขนาดแนะนำ: สี่เหลี่ยมจัตุรัส</small>
+                </div>
+                <div class="product-info">
+                    <h3>เสื้อหน่วยงาน / ราชการ</h3>
+                    <p>ออกแบบสุภาพ ภูมิฐาน สีตรงตามมาตรฐานหน่วยงานรัฐ</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="placeholder-box" style="height: 250px;">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>[ ใส่รูปเสื้อ KMUTT / กีฬา ]</span>
+                    <small>ขนาดแนะนำ: สี่เหลี่ยมจัตุรัส</small>
+                </div>
+                <div class="product-info">
+                    <h3>เสื้อกีฬามหาวิทยาลัย</h3>
+                    <p>สไตล์สปอร์ต ทันสมัย เนื้อผ้าระบายอากาศได้ดีเยี่ยม</p>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="placeholder-box" style="height: 250px;">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>[ ใส่รูปเสื้อแก๊ง / บริษัท ]</span>
+                    <small>ขนาดแนะนำ: สี่เหลี่ยมจัตุรัส</small>
+                </div>
+                <div class="product-info">
+                    <h3>เสื้อบริษัท / เสื้อกลุ่ม</h3>
+                    <p>สร้างความเป็นน้ำหนึ่งใจเดียวกัน โดดเด่นไม่ซ้ำใคร</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="social-showcase">
+        <div>
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">งานจริงจากหน้าเพจ</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px;">เราอัปเดตผลงานการผลิตทุกวัน มั่นใจได้ในคุณภาพและการส่งมอบที่ตรงเวลา</p>
+            <ul style="list-style: none; color: #fff; line-height: 2;">
+                <li><i class="fa-solid fa-check" style="color: var(--primary); margin-right: 10px;"></i> เนื้อผ้าใส่สบาย เย็บอย่างคุณภาพ</li>
+                <li><i class="fa-solid fa-check" style="color: var(--primary); margin-right: 10px;"></i> มีทั้งเสื้อคอปก คอกลม คอวี</li>
+                <li><i class="fa-solid fa-check" style="color: var(--primary); margin-right: 10px;"></i> รองรับไซส์ปกติ, ผู้หญิง, และเด็ก</li>
+                <li><i class="fa-solid fa-check" style="color: var(--primary); margin-right: 10px;"></i> มีกางเกงดำ และ กางเกงพิมพ์ลายเข้าชุด</li>
+            </ul>
+        </div>
+        
+        <div class="embed-wrapper">
+            <h4 style="color: #333; margin-bottom: 10px; font-family: var(--font-main);">โพสต์อัปเดตล่าสุด</h4>
+            <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Ftwnsp21%2Fposts%2Fpfbid0gGg8cdeDdXwkK7yqJGfY7EyGtK7HDSJM8Qh4ejjGZg7a3madf74SPrEKswgYLF1Yl&show_text=true&width=auto" width="100%" height="450" style="border:none;overflow:hidden" scrolling="yes" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 60px 5%; background: var(--surface-lowest); border-top: 1px solid rgba(255,255,255,0.05);">
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">พร้อมจะทำเสื้อทีมแล้วหรือยัง?</h2>
+        <a href="https://www.facebook.com/twnsp21" class="btn-primary" style="margin-bottom: 30px;">
+            <i class="fa-brands fa-facebook-messenger"></i> ปรึกษาและออกแบบฟรี คลิก!
+        </a>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">
+            โทรศัพท์: 092-672-8927<br>
+            FOUR R SPORT - รับผลิตเสื้อกีฬาพิมพ์ลาย ปราจีนบุรี
+        </p>
+    </footer>
+
+</body>
+</html>
